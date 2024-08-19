@@ -1,6 +1,5 @@
 package com.canerkaseler.slotapipreview
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,17 +26,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun MessageCard(
-    @DrawableRes icon: Int,
-    title: String,
-    description: String,
-    positiveButtonText: String,
-    negativeButtonText: String,
-    onClickPositiveButton: () -> Unit,
-    onClickNegativeButton: () -> Unit,
+    messageData: MessageCardSlot.Parameters,
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .size(size = 300.dp), // This is added to simplify.
         colors = CardColors(
             containerColor = Color.LightGray,
             contentColor = Color.LightGray,
@@ -54,14 +48,14 @@ fun MessageCard(
                     .fillMaxWidth()
             ) {
                 Image(
-                    painterResource(id = icon),
+                    painterResource(id = messageData.icon),
                     contentDescription = "Dialog icon.",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(72.dp),
                 )
                 Text(
-                    text = title,
+                    text = messageData.title,
                     fontSize = 24.sp,
                     style = TextStyle(fontWeight = FontWeight.Black),
                     color = Color.Black,
@@ -70,7 +64,7 @@ fun MessageCard(
                 )
 
                 Text(
-                    text = description,
+                    text = messageData.description,
                     fontSize = 18.sp,
                     color = Color.Black,
                     modifier = Modifier
@@ -92,10 +86,10 @@ fun MessageCard(
                         disabledContentColor = Color.Gray,
                         disabledContainerColor = Color.Gray,
                     ),
-                    onClick = onClickPositiveButton,
+                    onClick = messageData.onClickPositiveButton,
                     content = {
                         Text(
-                            text = positiveButtonText,
+                            text = messageData.positiveButtonText,
                             fontSize = 16.sp,
                             color = Color.White,
                             modifier = Modifier
@@ -111,10 +105,10 @@ fun MessageCard(
                         disabledContentColor = Color.Gray,
                         disabledContainerColor = Color.Gray,
                     ),
-                    onClick = onClickNegativeButton,
+                    onClick = messageData.onClickNegativeButton,
                     content = {
                         Text(
-                            text = negativeButtonText,
+                            text = messageData.negativeButtonText,
                             fontSize = 16.sp,
                             color = Color.White,
                             modifier = Modifier
@@ -126,12 +120,28 @@ fun MessageCard(
     }
 }
 
+enum class ErrorType {
+    BATTERY,
+    CONNECTION,
+    GENERAL,
+}
+
+sealed interface MessageCardSlot {
+    data class Parameters(
+        val icon: Int,
+        val title: String,
+        val description: String,
+        val positiveButtonText: String,
+        val negativeButtonText: String,
+        val onClickPositiveButton: () -> Unit,
+        val onClickNegativeButton: () -> Unit,
+    )
+}
+
 @Preview
 @Composable
 private fun Preview() {
-    MessageCard(
-        modifier = Modifier
-            .size(size = 300.dp),
+    val messageData = MessageCardSlot.Parameters(
         icon = R.drawable.wifi_error,
         title = "Connection Problem",
         description = "There is an internet connection error.",
@@ -139,5 +149,11 @@ private fun Preview() {
         negativeButtonText = "Cancel",
         onClickPositiveButton = {},
         onClickNegativeButton = {},
+    )
+
+    MessageCard(
+        modifier = Modifier
+            .size(size = 300.dp),
+        messageData = messageData,
     )
 }
