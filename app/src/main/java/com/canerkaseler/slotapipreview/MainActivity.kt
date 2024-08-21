@@ -25,28 +25,40 @@ class MainActivity : ComponentActivity() {
                             icon = R.drawable.general_error,
                             title = "Application Problem",
                             description = "You can inform to us about it.",
-                            positiveButtonText = "Send an e-mail",
-                            negativeButtonText = "Close",
-                            onClickPositiveButton = {},
-                            onClickNegativeButton = {},
+                            positiveButton = MessageCardSlot.ParametersPositiveButton(
+                                text = "Send an e-mail",
+                                onClick = {},
+                            ),
+                            negativeButton = MessageCardSlot.ParametersNegativeButton(
+                                text = "Close",
+                                onClick = {},
+                            ),
                         ),
                         batteryMessageData = MessageCardSlot.Parameters(
                             icon = R.drawable.battery_error,
                             title = "Battery Problem",
                             description = "There is an battery error.",
-                            positiveButtonText = "Check battery",
-                            negativeButtonText = "Close",
-                            onClickPositiveButton = {},
-                            onClickNegativeButton = {},
+                            positiveButton = MessageCardSlot.ParametersPositiveButton(
+                                text = "Check battery",
+                                onClick = {},
+                            ),
+                            negativeButton = MessageCardSlot.ParametersNegativeButton(
+                                text = "Close",
+                                onClick = {},
+                            ),
                         ),
                         connectionMessageData = MessageCardSlot.Parameters(
                             icon = R.drawable.wifi_error,
                             title = "Connection Problem",
                             description = "There is an internet connection error.",
-                            positiveButtonText = "Report an issue",
-                            negativeButtonText = "Cancel",
-                            onClickPositiveButton = {},
-                            onClickNegativeButton = {},
+                            positiveButton = MessageCardSlot.ParametersPositiveButton(
+                                text = "Report an issue",
+                                onClick = {},
+                            ),
+                            negativeButton = MessageCardSlot.ParametersNegativeButton(
+                                text = "Close",
+                                onClick = {},
+                            ),
                         )
                     )
                 }

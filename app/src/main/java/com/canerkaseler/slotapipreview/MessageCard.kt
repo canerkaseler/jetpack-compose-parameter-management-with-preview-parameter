@@ -88,10 +88,10 @@ fun MessageCard(
                         disabledContentColor = Color.Gray,
                         disabledContainerColor = Color.Gray,
                     ),
-                    onClick = messageData.onClickPositiveButton,
+                    onClick = messageData.positiveButton.onClick,
                     content = {
                         Text(
-                            text = messageData.positiveButtonText,
+                            text = messageData.positiveButton.text,
                             fontSize = 16.sp,
                             color = Color.White,
                             modifier = Modifier
@@ -107,10 +107,10 @@ fun MessageCard(
                         disabledContentColor = Color.Gray,
                         disabledContainerColor = Color.Gray,
                     ),
-                    onClick = messageData.onClickNegativeButton,
+                    onClick = messageData.negativeButton.onClick,
                     content = {
                         Text(
-                            text = messageData.negativeButtonText,
+                            text = messageData.negativeButton.text,
                             fontSize = 16.sp,
                             color = Color.White,
                             modifier = Modifier
@@ -133,10 +133,16 @@ sealed interface MessageCardSlot {
         val icon: Int,
         val title: String,
         val description: String,
-        val positiveButtonText: String,
-        val negativeButtonText: String,
-        val onClickPositiveButton: () -> Unit,
-        val onClickNegativeButton: () -> Unit,
+        val positiveButton: ParametersPositiveButton,
+        val negativeButton: ParametersNegativeButton,
+    )
+    data class ParametersPositiveButton(
+        val text: String,
+        val onClick: () -> Unit,
+    )
+    data class ParametersNegativeButton(
+        val text: String,
+        val onClick: () -> Unit,
     )
 }
 
@@ -145,10 +151,14 @@ internal val fakeGeneralErrorParameters =
         icon = R.drawable.general_error,
         title = "Application Problem",
         description = "You can inform to us about it.",
-        positiveButtonText = "Send an e-mail",
-        negativeButtonText = "Close",
-        onClickPositiveButton = {},
-        onClickNegativeButton = {},
+        positiveButton = MessageCardSlot.ParametersPositiveButton(
+            text = "Send an e-mail",
+            onClick = {},
+        ),
+        negativeButton = MessageCardSlot.ParametersNegativeButton(
+            text = "Close",
+            onClick = {},
+        ),
     )
 
 internal val fakeBatteryErrorMessageParameters =
@@ -156,10 +166,14 @@ internal val fakeBatteryErrorMessageParameters =
         icon = R.drawable.battery_error,
         title = "Battery Problem",
         description = "There is an battery error.",
-        positiveButtonText = "Check battery",
-        negativeButtonText = "Close",
-        onClickPositiveButton = {},
-        onClickNegativeButton = {},
+        positiveButton = MessageCardSlot.ParametersPositiveButton(
+            text = "Check battery",
+            onClick = {},
+        ),
+        negativeButton = MessageCardSlot.ParametersNegativeButton(
+            text = "Close",
+            onClick = {},
+        ),
     )
 
 internal val fakeConnectionErrorMessageParameters =
@@ -167,10 +181,14 @@ internal val fakeConnectionErrorMessageParameters =
         icon = R.drawable.wifi_error,
         title = "Connection Problem",
         description = "There is an internet connection error.",
-        positiveButtonText = "Report an issue",
-        negativeButtonText = "Cancel",
-        onClickPositiveButton = {},
-        onClickNegativeButton = {},
+        positiveButton = MessageCardSlot.ParametersPositiveButton(
+            text = "Report an issue",
+            onClick = {},
+        ),
+        negativeButton = MessageCardSlot.ParametersNegativeButton(
+            text = "Close",
+            onClick = {},
+        ),
     )
 
 // https://kotlinlang.org/docs/fun-interfaces.html
