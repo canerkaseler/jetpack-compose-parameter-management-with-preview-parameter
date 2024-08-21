@@ -21,6 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -138,10 +140,30 @@ sealed interface MessageCardSlot {
     )
 }
 
-@Preview
-@Composable
-private fun Preview() {
-    val messageData = MessageCardSlot.Parameters(
+internal val fakeGeneralErrorParameters =
+    MessageCardSlot.Parameters(
+        icon = R.drawable.general_error,
+        title = "Application Problem",
+        description = "You can inform to us about it.",
+        positiveButtonText = "Send an e-mail",
+        negativeButtonText = "Close",
+        onClickPositiveButton = {},
+        onClickNegativeButton = {},
+    )
+
+internal val fakeBatteryErrorMessageParameters =
+    MessageCardSlot.Parameters(
+        icon = R.drawable.battery_error,
+        title = "Battery Problem",
+        description = "There is an battery error.",
+        positiveButtonText = "Check battery",
+        negativeButtonText = "Close",
+        onClickPositiveButton = {},
+        onClickNegativeButton = {},
+    )
+
+internal val fakeConnectionErrorMessageParameters =
+    MessageCardSlot.Parameters(
         icon = R.drawable.wifi_error,
         title = "Connection Problem",
         description = "There is an internet connection error.",
@@ -151,9 +173,52 @@ private fun Preview() {
         onClickNegativeButton = {},
     )
 
+// https://kotlinlang.org/docs/fun-interfaces.html
+private fun interface MessageCardPreviewData {
+    @Composable
+    fun value(): MessageCardSlot.Parameters
+}
+
+private fun fakeMessageCardState(
+    parameters: MessageCardSlot.Parameters
+): MessageCardPreviewData {
+    return MessageCardPreviewData(
+        function = {
+            parameters
+        }
+    )
+}
+
+private val fakeMessageCardStateList = listOf(
+    fakeMessageCardState(parameters = fakeGeneralErrorParameters),
+    fakeMessageCardState(parameters = fakeGeneralErrorParameters.copy(
+        icon = R.drawable.bug,
+        title = "General Bug",
+    )),
+    fakeMessageCardState(parameters = fakeBatteryErrorMessageParameters),
+    fakeMessageCardState(parameters = fakeBatteryErrorMessageParameters.copy(
+        icon = R.drawable.fire,
+        title = "Low Battery!",
+    )),
+    fakeMessageCardState(parameters = fakeConnectionErrorMessageParameters),
+    fakeMessageCardState(parameters = fakeConnectionErrorMessageParameters.copy(
+        icon = R.drawable.money,
+        title = "Free internet?"
+    )),
+)
+
+private class MessageCardPreviewProvider : PreviewParameterProvider<MessageCardPreviewData> {
+    override val values = fakeMessageCardStateList.asSequence()
+}
+
+@Preview
+@Composable
+private fun Preview(
+    @PreviewParameter(MessageCardPreviewProvider::class) messageCardPreviewData: MessageCardPreviewData,
+) {
     MessageCard(
         modifier = Modifier
             .size(size = 300.dp),
-        messageData = messageData,
+        messageData = messageCardPreviewData.value(),
     )
 }
