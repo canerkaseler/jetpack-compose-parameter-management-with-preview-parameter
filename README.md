@@ -6,6 +6,7 @@ This repository has a [Medium Article](https://medium.com/kotlin-academy/slot-ap
 
 
 > If you would like to support my work, coffee is my best friend for writing code and articles: https://buymeacoffee.com/canerkaseler ☕️
+>
 > You can reach me on social media and other platforms, stay tuned: https://linktr.ee/canerkaseler 🤝
 
 ## Introduction of the article
