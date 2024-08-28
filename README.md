@@ -1,9 +1,8 @@
-# Jetpack Compose Slot API Pattern with @PreviewParameter
+# How to handle parameters and use @PreviewParameter in Jetpack Compose
 
-This repository has a [Medium Article](https://medium.com/kotlin-academy/slot-api-pattern-previewparameter-in-jetpack-compose-6308e46155e8) which targets to show how to use Slot API pattern and @PreviewParameter in Jetpack Compose UI.
+This repository has a [Medium Article](https://medium.com/kotlin-academy/slot-api-pattern-previewparameter-in-jetpack-compose-6308e46155e8) which targets to show how to handle parameters and use @PreviewParameter in Jetpack Compose UI.
 
-<img width="600" alt="Screenshot 2024-08-19 at 22 56 22" src="https://github.com/user-attachments/assets/8f828a6d-b5bb-47ed-83fd-3d2cc56f638b">
-
+<img width="600" alt="Screenshot 2024-08-19 at 22 56 22" src="https://github.com/user-attachments/assets/a2fa3e04-2f11-4c82-af60-8e5d52e4819c">
 
 > If you would like to support my work, coffee is my best friend for writing code and articles: https://buymeacoffee.com/canerkaseler ☕️
 >
@@ -15,7 +14,7 @@ I create a basic Android application with only Jetpack Compose in this article. 
 
 Table of contents:
 1. Compose Design with Traditional Way (_If you know compose, you can skip this part._)
-2. Slot API Pattern in Jetpack Compose
+2. Management of parameters of compose functions in Jetpack Compose
 3. @PreviewParameter Approach in Compose Preview
 4. References
 
