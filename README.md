@@ -2,7 +2,8 @@
 
 This repository has a [Medium Article](https://medium.com/kotlin-academy/slot-api-pattern-previewparameter-in-jetpack-compose-6308e46155e8) which targets to show how to handle parameters and use @PreviewParameter in Jetpack Compose UI.
 
-<img width="600" alt="Screenshot 2024-08-19 at 22 56 22" src="https://github.com/user-attachments/assets/a2fa3e04-2f11-4c82-af60-8e5d52e4819c">
+<img width="600" alt="Screenshot 2024-08-19 at 22 56 22" src="https://github.com/user-attachments/assets/81c45cc8-fd2b-4b69-9012-ca75471cfdf5">
+
 
 > If you would like to support my work, coffee is my best friend for writing code and articles: https://buymeacoffee.com/canerkaseler ☕️
 >
